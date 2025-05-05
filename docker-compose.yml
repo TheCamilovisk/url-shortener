@@ -1,0 +1,36 @@
+services:
+  reverse-proxy:
+    image: traefik:v2.10
+    command:
+      # Remove for production
+      - --api.insecure=true
+      - --providers.docker
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.leresolver.acme.email=camilolgon@gmail.com
+      - --certificatesresolvers.leresolver.acme.storage=/letsencrypt/acme.json
+      - --certificatesresolvers.leresolver.acme.tlschallenge=true
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+    volumes:
+      - ./letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - traefik.enable=true
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: urlshortener
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    # Remove for production
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdata:
