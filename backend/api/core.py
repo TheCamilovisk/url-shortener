@@ -25,6 +25,7 @@ class Settings(BaseSettings):
     )
 
     DATABASE_URL: str
+    MY_DOMAIN: str
 
 
 @lru_cache()

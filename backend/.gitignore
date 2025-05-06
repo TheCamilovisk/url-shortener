@@ -179,3 +179,6 @@ pyrightconfig.json
 
 # VSCode files
 .vscode
+
+# RestClient files
+restclient
