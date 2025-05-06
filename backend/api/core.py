@@ -37,7 +37,8 @@ def get_settings() -> Settings:
     return Settings()
 
 
-# Initialize the asynchronous SQLAlchemy engine using the DATABASE_URL from settings.
+# Initialize the asynchronous SQLAlchemy engine using the DATABASE_URL from
+# settings.
 engine = create_async_engine(get_settings().DATABASE_URL)
 
 
